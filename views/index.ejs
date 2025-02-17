@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buyfinity - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlbItGcEdPWBfDJB1ftTxiK5qIVpIRK1toYw&s" type="image/x-icon">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+      .lora {
+        font-family: "Lora", serif;
+        font-weight: 500;
+      }
+      .great {
+        font-family: "Great Vibes", serif;
+        font-weight: 400;
+      }
+      :root {
+        --black: #000000;
+        --brown: #48A6A7;
+        --yellow: #ffb22c;
+        --white: #f7f7f7;
+        --dWhite: #F2EFE7;
+      }
+      .custom-btn {
+        background: var(--brown);
+        border: none;
+        color: white !important;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+      .custom-btn:hover {
+        background: var(--brown);
+        transform: scale(1.05);
+      }
+      .form-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border: 2px solid var(--brown);
+      }
+      .hidden {
+        display: none;
+      }
+      .brown {
+        color: var(--brown);
+      }
+    </style>
+  </head>
+  <body class="overflow-hidden bg-[var(--dWhite)] d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <nav class="navbar px-lg-5 px-md-3 px-sm-2 px-1 fixed-top border-bottom" data-aos="fade-down">
+      <div class="brand display-5 great">BuyFinity</div>
+      <button class="btn custom-btn border border-dark border-2 px-4" id="toggleForm">Register</button>
+    </nav>
+
+    <div class="container d-flex align-items-center justify-content-center">
+      <div class="col-lg-6 form-container hidden" id="registerForm" data-aos="zoom-in">
+        <div class="mb-4 lora text-center display-5 brown">Register</div>
+        <p class="text-start pb-3 px-4">Fill in the details below to create your account.</p>
+        <form action="/users/register" method="post">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-4 px-4" id="fullname" name="fullname" placeholder="Full Name" autocomplete="name" />
+            <label for="fullname" class="px-4">Full Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control rounded-4 px-4" id="email" name="email" placeholder="Email" autocomplete="email" />
+            <label for="email" class="px-4">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control rounded-4 px-4" id="password" name="password" placeholder="Password" autocomplete="new-password" />
+            <label for="password" class="px-4">Create Password</label>
+          </div>
+          <button type="submit" class="btn custom-btn w-100 rounded-4 py-2">Register</button>
+        </form>
+        <p class="text-center mt-3">Already have an account? <a href="#" id="showLogin" class="brown text-decoration-underline">Login</a></p>
+      </div>
+
+      <div class="col-lg-6 form-container" id="loginForm" data-aos="zoom-in">
+        <h2 class="mb-4 lora text-center display-5 brown">Login</h2>
+        <p class="text-start pb-3 px-4">Fill in the details below to log into your account.</p>
+        <form action="/users/login" method="post">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control rounded-4 px-4" name="email" id="loginEmail" placeholder="Email" autocomplete="email" />
+            <label for="loginEmail" class="px-4">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control rounded-4 px-4" name="password" id="loginPassword" placeholder="Password" autocomplete="current-password" />
+            <label for="loginPassword" class="px-4">Password</label>
+          </div>
+          <button type="submit" class="btn custom-btn w-100 rounded-4 py-2">Login</button>
+        </form>
+        <p class="text-center mt-3">Don't have an account? <a href="#" id="showRegister" class="brown text-decoration-underline">Register</a></p>
+      </div>
+    </div>
+    <% if (error && error.length > 0) { %>
+      <div class="alert alert-danger alert-dismissible fade show text-center w-50 fixed-top mx-auto" role="alert" style="top: 10px; z-index: 1050;">
+        <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } %>
+    
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+
+      document.getElementById("toggleForm").addEventListener("click", function () {
+        document.getElementById("registerForm").classList.toggle("hidden");
+        document.getElementById("loginForm").classList.toggle("hidden");
+        this.textContent = this.textContent === "Login" ? "Register" : "Login";
+      });
+
+      document.getElementById("showLogin").addEventListener("click", function () {
+        document.getElementById("registerForm").classList.add("hidden");
+        document.getElementById("loginForm").classList.remove("hidden");
+      });
+
+      document.getElementById("showRegister").addEventListener("click", function () {
+        document.getElementById("loginForm").classList.add("hidden");
+        document.getElementById("registerForm").classList.remove("hidden");
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

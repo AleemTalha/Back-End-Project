@@ -1,0 +1,13 @@
+:root {
+  --black: #000000;
+  --brown: #854836;
+  --yellow: #ffb22c;
+  --white: #f7f7f7;
+}
+
+.raleway {
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}

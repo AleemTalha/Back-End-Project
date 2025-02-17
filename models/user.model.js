@@ -6,13 +6,19 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  email: String,
-  password: String,
-  cart: {
-    type: Array,
-    default: [],
+  email: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  isAdmin: Boolean,
+  password: {
+    type: String,
+    required: true,
+  },
+  cart: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref : "product",
+  }],
   orders: {
     type: Array,
     default: [],
@@ -21,5 +27,5 @@ const userSchema = new mongoose.Schema({
   picture: String,
 });
 
-const user = mongoose.model("owner", userSchema);
+const user = mongoose.model("user", userSchema);
 module.exports = user;

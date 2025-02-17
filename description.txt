@@ -1,0 +1,12 @@
+Main points   :
+ -  Debugger, and its package npm i debug 
+see in the file mongoose connection and there you will have to set the console log with it 
+also debugger start krne ke liye use command set DEBUG=development:* and set NODE_ENV=development for setting up environment
+( development ye function me paas kiya tha)
+ -  npm i config see the mongooseconnection and deve.json 
+ ye aik aisa package h jisme hm development ke and production 
+ time ke liye kuch specific settings jo user access kr skta h wo krty hain and ye auto matically data fetch krke js file me le ata h 
+ - How to set the production and development envirment for project like there are somethings that we can only handle while development
+ like creating an admin and uske ilawa production me nai bnta so we use the set NODE_ENV=development ye us waqt aapki development.json chlae ga 
+ and jb production set kr dein ge to wo production.json chlae ga 
+ - learn about the joy npm package for error handling while submitting form
